@@ -1,0 +1,79 @@
+<apex:page lightningStylesheets="true" standardController="Opportunity" recordSetVar="records" applyBodyTag="false">
+  <!--
+    @description Use this page for a List View Button on the Opportunities Tab
+                  that will merge a document for each record in the list view
+  -->
+  <apex:includeScript value="{! $Resource.Mambo__MamboMerge }" />
+  <apex:slds />
+  <apex:includeLightning />
+  <apex:form>
+    <apex:pageBlock>
+      <apex:pageBlockButtons location="top">
+        <apex:commandButton action="{!cancel}" value="Back" />
+      </apex:pageBlockButtons>
+    </apex:pageBlock>
+  </apex:form>
+
+  <apex:pageMessages />
+  <div id="lightning" style="display: none;" />
+  <div class="slds-scope" style="margin-bottom: 50px;">
+    <div class="slds-progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" role="progressbar" style="width:100%; height: 20px;">
+      <span id="myBar" class="slds-progress-bar__value" style="width:0%">
+        <span id="assistiveText" class="slds-assistive-text">Progress: 0%</span>
+      </span>
+    </div>
+  </div>
+
+  <script>
+    // TODO (REQUIRED): Please enter your template Id in the templateId variable below
+    const templateId = "OpportunityListViewBatch";
+
+    // TODO (REQUIRED): Please specify whether you are using checkboxes on your list view
+    const mergeOnlyCheckedRecordsInListView = true;
+
+    // TODO (OPTIONAL): Enable debug mode if things are working
+    const debugOn = true;
+
+    /*****  DO NOT CHANGE BELOW CODE *****/
+    const idsString = mergeOnlyCheckedRecordsInListView ? "{!selected}" : "{!records}";
+    let recordIds = idsString.substring(1, idsString.length - 1).split(', ');
+
+    var counter = 0;
+    function incrementMe() {
+      counter++;
+      var v = parseInt(100 * counter / recordIds.length);
+      var elem = document.getElementById('myBar');
+      elem.style.width = v + "%";
+
+      var asst = document.getElementById("assistiveText");
+      elem.innerText = 'Progress: ' + v + '%'
+    }
+
+    if (recordIds.length > 0 && templateId) {
+      $Lightning.use("c:mamboMergeApp", function () {
+        for ( let i=0; i<recordIds.length; i++ ){
+          $Lightning.createComponent(
+            "mambo:mamboMerge",
+            {
+              templateId: templateId,
+              debug: debugOn,
+              recordId: recordIds[i]
+            },
+            "lightning",
+            function (cmp, status, errorMessage) {
+              if (status === 'SUCCESS') {
+                setTimeout(
+                  functions() {
+                    incrementMe();
+                    console.log("isSuccess", cmp.get('v.isSuccess'))
+                  },
+                  (i*5000)
+                );
+              }
+            }
+          );
+        }
+      });
+    }
+  </script>
+</apex:page>
