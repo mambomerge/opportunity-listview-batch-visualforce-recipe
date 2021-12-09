@@ -12,9 +12,5 @@
     <members>Opportunity</members>
     <name>CustomObject</name>
   </types>
-  <types>
-    <members>Opportunity.Batch_Merge</members>
-    <name>WebLink</name>
-  </types>
   <version>53.0</version>
 </Package>
