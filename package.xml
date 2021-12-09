@@ -9,16 +9,16 @@
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
-        <members>Opportunity</members>
-        <name>CustomObject</name>
-    </types>
-    <types>
         <members>Opportunity.Batch_Merge</members>
         <name>WebLink</name>
+    </types>
+    <types>
+        <members>Opportunity</members>
+        <name>CustomObject</name>
     </types>
     <types>
         <members>OpportunityListViewBatchMamboMerge</members>
         <name>ApexPage</name>
     </types>
-    <version>52.0</version>
+    <version>53.0</version>
 </Package>
