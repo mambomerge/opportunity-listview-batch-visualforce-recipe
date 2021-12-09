@@ -27,4 +27,4 @@ This recipe will step you through creating a button for Opportunity List Views t
 
 6. Create a new Custom Button for List Views on the Opportunity Object that uses the OpportunityListViewBatchMamboMerge page
 
-7. Edit the Opportunity Classic List Views to display the new button
+7. Edit the Opportunity Classic Search Layout to display the new button
