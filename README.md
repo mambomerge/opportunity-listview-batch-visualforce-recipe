@@ -24,3 +24,7 @@ This recipe will step you through creating a button for Opportunity List Views t
 5c. Add a new button to the configuration and specify your Template Id
 
 5d. Save the Configuration
+
+6. Create a new Custom Button for List Views on the Opportunity Object that uses the OpportunityListViewBatchMamboMerge page
+
+7. Edit the Opportunity Classic List Views to display the new button
